@@ -1,0 +1,45 @@
+|projeto4
+Entradas[0] => Mux7.IN36
+Entradas[1] => Mux6.IN36
+Entradas[2] => Mux5.IN36
+Entradas[3] => Mux4.IN36
+Entradas[4] => Mux3.IN36
+Entradas[5] => Mux2.IN36
+Entradas[6] => Mux1.IN36
+Entradas[7] => Mux0.IN36
+Entradas[8] => Mux7.IN28
+Entradas[9] => Mux6.IN28
+Entradas[10] => Mux5.IN28
+Entradas[11] => Mux4.IN28
+Entradas[12] => Mux3.IN28
+Entradas[13] => Mux2.IN28
+Entradas[14] => Mux1.IN28
+Entradas[15] => Mux0.IN28
+Entradas[16] => Mux7.IN20
+Entradas[17] => Mux6.IN20
+Entradas[18] => Mux5.IN20
+Entradas[19] => Mux4.IN20
+Entradas[20] => Mux3.IN20
+Entradas[21] => Mux2.IN20
+Entradas[22] => Mux1.IN20
+Entradas[23] => Mux0.IN20
+Entradas[24] => Mux7.IN12
+Entradas[25] => Mux6.IN12
+Entradas[26] => Mux5.IN12
+Entradas[27] => Mux4.IN12
+Entradas[28] => Mux3.IN12
+Entradas[29] => Mux2.IN12
+Entradas[30] => Mux1.IN12
+Entradas[31] => Mux0.IN12
+Selecao[0] => Add0.IN4
+Selecao[1] => Add0.IN3
+Saida[0] << Mux7.DB_MAX_OUTPUT_PORT_TYPE
+Saida[1] << Mux6.DB_MAX_OUTPUT_PORT_TYPE
+Saida[2] << Mux5.DB_MAX_OUTPUT_PORT_TYPE
+Saida[3] << Mux4.DB_MAX_OUTPUT_PORT_TYPE
+Saida[4] << Mux3.DB_MAX_OUTPUT_PORT_TYPE
+Saida[5] << Mux2.DB_MAX_OUTPUT_PORT_TYPE
+Saida[6] << Mux1.DB_MAX_OUTPUT_PORT_TYPE
+Saida[7] << Mux0.DB_MAX_OUTPUT_PORT_TYPE
+
+

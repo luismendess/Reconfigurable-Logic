@@ -1,0 +1,276 @@
+|calculator
+SW[0] => adder:U1.A[0]
+SW[0] => subtractor:U2.A[0]
+SW[0] => multiplier:U3.A[0]
+SW[0] => divider:U4.A[0]
+SW[0] => and_operation:U5.A[0]
+SW[0] => or_operation:U6.A[0]
+SW[1] => adder:U1.A[1]
+SW[1] => subtractor:U2.A[1]
+SW[1] => multiplier:U3.A[1]
+SW[1] => divider:U4.A[1]
+SW[1] => and_operation:U5.A[1]
+SW[1] => or_operation:U6.A[1]
+SW[2] => adder:U1.A[2]
+SW[2] => subtractor:U2.A[2]
+SW[2] => multiplier:U3.A[2]
+SW[2] => divider:U4.A[2]
+SW[2] => and_operation:U5.A[2]
+SW[2] => or_operation:U6.A[2]
+SW[3] => adder:U1.B[0]
+SW[3] => subtractor:U2.B[0]
+SW[3] => multiplier:U3.B[0]
+SW[3] => divider:U4.B[0]
+SW[3] => and_operation:U5.B[0]
+SW[3] => or_operation:U6.B[0]
+SW[4] => adder:U1.B[1]
+SW[4] => subtractor:U2.B[1]
+SW[4] => multiplier:U3.B[1]
+SW[4] => divider:U4.B[1]
+SW[4] => and_operation:U5.B[1]
+SW[4] => or_operation:U6.B[1]
+SW[5] => adder:U1.B[2]
+SW[5] => subtractor:U2.B[2]
+SW[5] => multiplier:U3.B[2]
+SW[5] => divider:U4.B[2]
+SW[5] => and_operation:U5.B[2]
+SW[5] => or_operation:U6.B[2]
+SW[6] => Mux0.IN4
+SW[6] => Mux1.IN4
+SW[6] => Mux2.IN4
+SW[6] => Mux3.IN4
+SW[6] => Mux4.IN4
+SW[6] => Mux5.IN4
+SW[6] => Mux6.IN4
+SW[6] => Mux7.IN4
+SW[6] => Mux8.IN8
+SW[7] => Mux0.IN3
+SW[7] => Mux1.IN3
+SW[7] => Mux2.IN3
+SW[7] => Mux3.IN3
+SW[7] => Mux4.IN3
+SW[7] => Mux5.IN3
+SW[7] => Mux6.IN3
+SW[7] => Mux7.IN3
+SW[7] => Mux8.IN7
+SW[8] => Mux0.IN2
+SW[8] => Mux1.IN2
+SW[8] => Mux2.IN2
+SW[8] => Mux3.IN2
+SW[8] => Mux4.IN2
+SW[8] => Mux5.IN2
+SW[8] => Mux6.IN2
+SW[8] => Mux7.IN2
+SW[8] => Mux8.IN6
+SW[9] => ~NO_FANOUT~
+SEG1[0] << sevensegmentdecoder:U7.seg[0]
+SEG1[1] << sevensegmentdecoder:U7.seg[1]
+SEG1[2] << sevensegmentdecoder:U7.seg[2]
+SEG1[3] << sevensegmentdecoder:U7.seg[3]
+SEG1[4] << sevensegmentdecoder:U7.seg[4]
+SEG1[5] << sevensegmentdecoder:U7.seg[5]
+SEG1[6] << sevensegmentdecoder:U7.seg[6]
+SEG2[0] << sevensegmentdecoder:U8.seg[0]
+SEG2[1] << sevensegmentdecoder:U8.seg[1]
+SEG2[2] << sevensegmentdecoder:U8.seg[2]
+SEG2[3] << sevensegmentdecoder:U8.seg[3]
+SEG2[4] << sevensegmentdecoder:U8.seg[4]
+SEG2[5] << sevensegmentdecoder:U8.seg[5]
+SEG2[6] << sevensegmentdecoder:U8.seg[6]
+Overflow << Mux8.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|calculator|Adder:U1
+A[0] => Add0.IN3
+A[1] => Add0.IN2
+A[2] => Add0.IN1
+B[0] => Add0.IN6
+B[1] => Add0.IN5
+B[2] => Add0.IN4
+Sum[0] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+Sum[1] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+Sum[2] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+Sum[3] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+Sum[4] <= <GND>
+Sum[5] <= <GND>
+Sum[6] <= <GND>
+Sum[7] <= <GND>
+Overflow <= <GND>
+
+
+|calculator|Subtractor:U2
+A[0] => Add0.IN16
+A[1] => Add0.IN15
+A[2] => Add0.IN9
+A[2] => Add0.IN10
+A[2] => Add0.IN11
+A[2] => Add0.IN12
+A[2] => Add0.IN13
+A[2] => Add0.IN14
+B[0] => Add0.IN8
+B[1] => Add0.IN7
+B[2] => Add0.IN1
+B[2] => Add0.IN2
+B[2] => Add0.IN3
+B[2] => Add0.IN4
+B[2] => Add0.IN5
+B[2] => Add0.IN6
+Diff[0] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+Diff[1] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+Diff[2] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+Diff[3] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+Diff[4] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+Diff[5] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+Diff[6] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+Diff[7] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|calculator|Multiplier:U3
+A[0] => Mult0.IN2
+A[1] => Mult0.IN1
+A[2] => Mult0.IN0
+B[0] => Mult0.IN5
+B[1] => Mult0.IN4
+B[2] => Mult0.IN3
+Prod[0] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Prod[1] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Prod[2] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Prod[3] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Prod[4] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Prod[5] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Prod[6] <= <GND>
+Prod[7] <= <GND>
+Overflow <= <GND>
+
+
+|calculator|Divider:U4
+A[0] => Div0.IN2
+A[1] => Div0.IN1
+A[2] => Div0.IN0
+B[0] => Div0.IN5
+B[0] => Equal0.IN2
+B[1] => Div0.IN4
+B[1] => Equal0.IN1
+B[2] => Div0.IN3
+B[2] => Equal0.IN0
+Quot[0] <= Div0.DB_MAX_OUTPUT_PORT_TYPE
+Quot[1] <= Div0.DB_MAX_OUTPUT_PORT_TYPE
+Quot[2] <= Div0.DB_MAX_OUTPUT_PORT_TYPE
+Quot[3] <= <GND>
+Quot[4] <= <GND>
+Quot[5] <= <GND>
+Quot[6] <= <GND>
+Quot[7] <= <GND>
+Div_By_Zero <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|calculator|And_Operation:U5
+A[0] => And_Result.IN0
+A[1] => And_Result.IN0
+A[2] => And_Result.IN0
+B[0] => And_Result.IN1
+B[1] => And_Result.IN1
+B[2] => And_Result.IN1
+And_Result[0] <= And_Result.DB_MAX_OUTPUT_PORT_TYPE
+And_Result[1] <= And_Result.DB_MAX_OUTPUT_PORT_TYPE
+And_Result[2] <= And_Result.DB_MAX_OUTPUT_PORT_TYPE
+And_Result[3] <= <GND>
+And_Result[4] <= <GND>
+And_Result[5] <= <GND>
+And_Result[6] <= <GND>
+And_Result[7] <= <GND>
+
+
+|calculator|Or_Operation:U6
+A[0] => Or_Result.IN0
+A[1] => Or_Result.IN0
+A[2] => Or_Result.IN0
+B[0] => Or_Result.IN1
+B[1] => Or_Result.IN1
+B[2] => Or_Result.IN1
+Or_Result[0] <= Or_Result.DB_MAX_OUTPUT_PORT_TYPE
+Or_Result[1] <= Or_Result.DB_MAX_OUTPUT_PORT_TYPE
+Or_Result[2] <= Or_Result.DB_MAX_OUTPUT_PORT_TYPE
+Or_Result[3] <= <GND>
+Or_Result[4] <= <GND>
+Or_Result[5] <= <GND>
+Or_Result[6] <= <GND>
+Or_Result[7] <= <GND>
+
+
+|calculator|SevenSegmentDecoder:U7
+binary_in[0] => Mux0.IN19
+binary_in[0] => Mux1.IN19
+binary_in[0] => Mux2.IN19
+binary_in[0] => Mux3.IN19
+binary_in[0] => Mux4.IN19
+binary_in[0] => Mux5.IN19
+binary_in[0] => Mux6.IN19
+binary_in[1] => Mux0.IN18
+binary_in[1] => Mux1.IN18
+binary_in[1] => Mux2.IN18
+binary_in[1] => Mux3.IN18
+binary_in[1] => Mux4.IN18
+binary_in[1] => Mux5.IN18
+binary_in[1] => Mux6.IN18
+binary_in[2] => Mux0.IN17
+binary_in[2] => Mux1.IN17
+binary_in[2] => Mux2.IN17
+binary_in[2] => Mux3.IN17
+binary_in[2] => Mux4.IN17
+binary_in[2] => Mux5.IN17
+binary_in[2] => Mux6.IN17
+binary_in[3] => Mux0.IN16
+binary_in[3] => Mux1.IN16
+binary_in[3] => Mux2.IN16
+binary_in[3] => Mux3.IN16
+binary_in[3] => Mux4.IN16
+binary_in[3] => Mux5.IN16
+binary_in[3] => Mux6.IN16
+seg[0] <= Mux6.DB_MAX_OUTPUT_PORT_TYPE
+seg[1] <= Mux5.DB_MAX_OUTPUT_PORT_TYPE
+seg[2] <= Mux4.DB_MAX_OUTPUT_PORT_TYPE
+seg[3] <= Mux3.DB_MAX_OUTPUT_PORT_TYPE
+seg[4] <= Mux2.DB_MAX_OUTPUT_PORT_TYPE
+seg[5] <= Mux1.DB_MAX_OUTPUT_PORT_TYPE
+seg[6] <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|calculator|SevenSegmentDecoder:U8
+binary_in[0] => Mux0.IN19
+binary_in[0] => Mux1.IN19
+binary_in[0] => Mux2.IN19
+binary_in[0] => Mux3.IN19
+binary_in[0] => Mux4.IN19
+binary_in[0] => Mux5.IN19
+binary_in[0] => Mux6.IN19
+binary_in[1] => Mux0.IN18
+binary_in[1] => Mux1.IN18
+binary_in[1] => Mux2.IN18
+binary_in[1] => Mux3.IN18
+binary_in[1] => Mux4.IN18
+binary_in[1] => Mux5.IN18
+binary_in[1] => Mux6.IN18
+binary_in[2] => Mux0.IN17
+binary_in[2] => Mux1.IN17
+binary_in[2] => Mux2.IN17
+binary_in[2] => Mux3.IN17
+binary_in[2] => Mux4.IN17
+binary_in[2] => Mux5.IN17
+binary_in[2] => Mux6.IN17
+binary_in[3] => Mux0.IN16
+binary_in[3] => Mux1.IN16
+binary_in[3] => Mux2.IN16
+binary_in[3] => Mux3.IN16
+binary_in[3] => Mux4.IN16
+binary_in[3] => Mux5.IN16
+binary_in[3] => Mux6.IN16
+seg[0] <= Mux6.DB_MAX_OUTPUT_PORT_TYPE
+seg[1] <= Mux5.DB_MAX_OUTPUT_PORT_TYPE
+seg[2] <= Mux4.DB_MAX_OUTPUT_PORT_TYPE
+seg[3] <= Mux3.DB_MAX_OUTPUT_PORT_TYPE
+seg[4] <= Mux2.DB_MAX_OUTPUT_PORT_TYPE
+seg[5] <= Mux1.DB_MAX_OUTPUT_PORT_TYPE
+seg[6] <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+
+

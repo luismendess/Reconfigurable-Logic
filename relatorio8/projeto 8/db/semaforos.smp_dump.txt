@@ -1,0 +1,9 @@
+
+State Machine - |semaforos|estado_atual
+Name estado_atual.STANDBY_OFF estado_atual.STANDBY_ON estado_atual.S1_RED_S2_YELLOW estado_atual.S1_RED_S2_GREEN estado_atual.S1_YELLOW_S2_RED estado_atual.S1_GREEN_S2_RED 
+estado_atual.S1_GREEN_S2_RED 0 0 0 0 0 0 
+estado_atual.S1_YELLOW_S2_RED 0 0 0 0 1 1 
+estado_atual.S1_RED_S2_GREEN 0 0 0 1 0 1 
+estado_atual.S1_RED_S2_YELLOW 0 0 1 0 0 1 
+estado_atual.STANDBY_ON 0 1 0 0 0 1 
+estado_atual.STANDBY_OFF 1 0 0 0 0 1 

@@ -1,0 +1,14 @@
+|projeto2
+sw1 => z.IN0
+sw1 => z.IN0
+sw2 => z.IN1
+sw2 => z.IN0
+sw2 => z.IN0
+sw3 => z.IN1
+sw3 => z.IN1
+sw3 => z.IN0
+sw4 => z.IN1
+sw4 => z.IN1
+z <= z.DB_MAX_OUTPUT_PORT_TYPE
+
+

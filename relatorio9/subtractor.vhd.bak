@@ -1,0 +1,20 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity Subtractor is
+    Port (
+        A : in STD_LOGIC_VECTOR(2 downto 0);
+        B : in STD_LOGIC_VECTOR(2 downto 0);
+        Diff : out STD_LOGIC_VECTOR(7 downto 0)
+    );
+end Subtractor;
+
+architecture Behavioral of Subtractor is
+begin
+    process(A, B)
+    begin
+        Diff <= ('0' & A) - ('0' & B);
+    end process;
+end Behavioral;

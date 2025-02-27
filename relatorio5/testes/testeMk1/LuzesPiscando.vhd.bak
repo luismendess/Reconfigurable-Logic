@@ -1,0 +1,77 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity LuzesPiscando is
+    Port (
+        clk       : in STD_LOGIC;               -- Clock do sistema
+        reset     : in STD_LOGIC;               -- Botão de reset (ativo em nível lógico 0)
+        enable    : in STD_LOGIC;               -- Chave de enable/pausa
+        velocidade: in STD_LOGIC_VECTOR(1 downto 0); -- Controle de velocidade
+        leds      : out STD_LOGIC_VECTOR(9 downto 0) -- Saída para os LEDs
+    );
+end entity;
+
+architecture LuzesPiscando of LuzesPiscando is
+    signal contador      : integer range 0 to 18 := 0; -- Contador para LEDs (ida e volta)
+    signal contador_clk  : integer := 0;              -- Contador para ajustar velocidade
+    signal clk_div       : STD_LOGIC := '0';          -- Clock dividido para controle de velocidade
+begin
+
+    -- Processo para dividir o clock conforme a velocidade selecionada
+    process(clk, reset)
+    begin
+        if reset = '0' then
+            contador_clk <= 0;
+            clk_div <= '0';
+        elsif rising_edge(clk) then
+            case velocidade is
+                when "00" => -- Velocidade mais lenta
+                    if contador_clk = 50_000_000 then -- Ajuste para frequência desejada
+                        contador_clk <= 0;
+                        clk_div <= not clk_div;
+                    else
+                        contador_clk <= contador_clk + 1;
+                    end if;
+                when "01" => -- Velocidade média
+                    if contador_clk = 25_000_000 then
+                        contador_clk <= 0;
+                        clk_div <= not clk_div;
+                    else
+                        contador_clk <= contador_clk + 1;
+                    end if;
+                when others => -- Velocidade mais rápida
+                    if contador_clk = 10_000_000 then
+                        contador_clk <= 0;
+                        clk_div <= not clk_div;
+                    else
+                        contador_clk <= contador_clk + 1;
+                    end if;
+            end case;
+        end if;
+    end process;
+
+    -- Processo principal para controlar os LEDs
+    process(clk_div, reset, enable)
+    begin
+        if reset = '0' then
+            contador <= 0;
+            leds <= (others => '0');
+        elsif rising_edge(clk_div) then
+            if enable = '1' then
+                if contador < 9 then
+                    leds <= (others => '0');
+                    leds(contador) <= '1';
+                    contador <= contador + 1;
+                elsif contador < 18 then
+                    leds <= (others => '0');
+                    leds(18 - contador) <= '1';
+                    contador <= contador + 1;
+                else
+                    contador <= 0;
+                end if;
+            end if;
+        end if;
+    end process;
+
+end architecture;

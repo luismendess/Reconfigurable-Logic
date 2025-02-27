@@ -1,0 +1,32 @@
+entity TestBench is
+end entity;
+
+architecture behavior of TestBench is
+    constant S : integer := 4; -- Número de bits de seleção para 16 entradas
+    constant M : integer := 8; -- Número de bits por entrada
+
+    signal sel : STD_LOGIC_VECTOR(S-1 downto 0);
+    signal din : STD_LOGIC_VECTOR((2**S * M) - 1 downto 0);
+    signal dout : STD_LOGIC_VECTOR(M-1 downto 0);
+begin
+    uut: entity work.GenericMux
+        generic map (
+            S => S,
+            M => M
+        )
+        port map (
+            sel => sel,
+            din => din,
+            dout => dout
+        );
+
+    process
+    begin
+        din <= X"0102030405060708090A0B0C0D0E0F10"; -- Exemplo de dados em hexadecimal
+        for i in 0 to 15 loop
+            sel <= std_logic_vector(to_unsigned(i, S));
+            wait for 10 ns;
+        end loop;
+        wait;
+    end process;
+end architecture;

@@ -1,0 +1,19 @@
+----------------PACOTES----------------
+library ieee;
+use ieee.std_logic_1164.all;
+---------------ENTIDADES---------------
+
+--A entidade projeto2 utiliza as portas sw1, sw2, sw3 e sw4 como entrada do sinal e a saida z,
+entity projeto2 is 
+--portas sw1 a sw4 são entradas switches, STD_LOGIC é o tipo de entrada (binário, assumindo valores 0 ou 1)
+	port (sw1, sw2, sw3, sw4: in STD_LOGIC; 
+			SSD0, SSD1, SSD2, SSD3, SSD4, SSD5, SDD6: out STD_LOGIC); --porta z é uma saída em LED também assumindo valores 0 ou 1 (apagado ou aceso)
+end entity;
+----------------PROJETO----------------
+architecture projeto2 of projeto2 is --utiliza a arquitetura do próprio projeto para definir a função e operação entre as portas usadas
+
+begin --inicia o bloco de comando do projeto
+	SSD0, SSD1 <= 1 when '11111110' and 
+	SSD2, SSD3, SSD4, SSD5, SDD6 <= 0 WHEN '11111110';
+	
+end architecture;

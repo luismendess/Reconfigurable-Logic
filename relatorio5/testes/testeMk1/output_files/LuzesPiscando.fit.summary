@@ -1,0 +1,12 @@
+I/O Assignment Analysis Status : Successful - Sat Dec 07 20:20:25 2024
+Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+Revision Name : LuzesPiscando
+Top-level Entity Name : LuzesPiscando
+Family : MAX 10
+Device : 10M50DAF484C7G
+Timing Models : Final
+Total pins : 0 / 360 ( 0 % )
+Total virtual pins : 0
+Total PLLs : 0 / 4 ( 0 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 2 ( 0 % )

@@ -1,0 +1,75 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity Timer_LED_SSD_Buttons is
+    Port ( clk : in STD_LOGIC;
+           rst_n : in STD_LOGIC; -- Reset assíncrono (0 para resetar)
+           pause : in STD_LOGIC; -- Pausar/Desabilitar
+           led : out STD_LOGIC;
+           ssd : out STD_LOGIC_VECTOR(6 downto 0);
+           btn_reset : in STD_LOGIC; -- Botão de reset
+           btn_pause : in STD_LOGIC -- Botão de pausar/desabilitar
+    );
+end Timer_LED_SSD_Buttons;
+
+architecture Behavioral of Timer_LED_SSD_Buttons is
+    signal count_down : natural := 10; -- Valor inicial do timer (em segundos)
+    signal timer_value : natural := 10; -- Valor atual do timer
+    signal ssd_value : STD_LOGIC_VECTOR(6 downto 0);
+
+    -- Função para converter valores BCD em formato para SSD
+    function BCD_to_SSD(value : natural) return STD_LOGIC_VECTOR is
+        variable result : STD_LOGIC_VECTOR(6 downto 0) := "0000000";
+        variable temp : natural := value;
+    begin
+        for i in 0 to 3 loop
+            for j in 0 to 2 loop
+                if (temp mod 10) >= 5 then
+                    result(3*i + j) <= '1';
+                else
+                    result(3*i + j) <= '0';
+                end if;
+                temp := temp / 10;
+            end loop;
+
+            -- Shift left for the next BCD digit
+            result(3*i + 2 downto 1) <= result(3*i + 1 downto 0);
+            result(3*i) <= '0';
+        end loop;
+
+        return result;
+    end BCD_to_SSD;
+
+begin
+    process(clk, rst_n, btn_reset, btn_pause)
+    begin
+        if rst_n = '0' then
+            count_down <= 10; -- Valor inicial do timer (em segundos)
+            timer_value <= 10; -- Reinicia o valor do timer
+            led <= '0'; -- Desliga o LED
+        elsif rising_edge(clk) then
+            if btn_reset = '1' then
+                count_down <= 10; -- Valor inicial do timer (em segundos)
+                timer_value <= 10; -- Reinicia o valor do timer
+                led <= '0'; -- Desliga o LED
+            elsif btn_pause = '1' then
+                if count_down > 0 then
+                    count_down <= count_down - 1; -- Decrementa o contador se não estiver pausado
+                end if;
+            else
+                if count_down > 0 then
+                    count_down <= count_down - 1; -- Decrementa o contador
+                else
+                    led <= '1'; -- Acende o LED quando o timer atinge 0
+                end if;
+            end if;
+
+            -- Atualiza o valor do timer nos SSDs
+            ssd_value <= BCD_to_SSD(timer_value);
+        end if;
+    end process;
+
+    ssd <= ssd_value; -- Atribui o valor dos SSDs à saída
+end Behavioral;

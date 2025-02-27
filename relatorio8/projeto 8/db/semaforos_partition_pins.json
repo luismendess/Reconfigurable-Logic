@@ -1,0 +1,49 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "semaforo1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "semaforo1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "semaforo1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "semaforo2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "semaforo2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "semaforo2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "mode_select[0]",
+					"strict" : false
+				},
+				{
+					"name" : "mode_select[1]",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
+					"name" : "clock",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

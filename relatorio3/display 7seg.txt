@@ -1,0 +1,4 @@
+display 7seg
+std_logic_vector
+select e when
+

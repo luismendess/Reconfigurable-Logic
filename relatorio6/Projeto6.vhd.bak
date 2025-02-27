@@ -1,0 +1,71 @@
+-- Package contendo o tipo e as procedures
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+package util is
+    type unsigned_array is array (natural range <>) of unsigned;
+    procedure find_min_max(
+        signal inputs : in unsigned_array;
+        signal min_val : out unsigned;
+        signal max_val : out unsigned
+    );
+end package;
+
+package body util is
+    procedure find_min_max(
+        signal inputs : in unsigned_array;
+        signal min_val : out unsigned;
+        signal max_val : out unsigned
+    ) is
+    begin
+        min_val := inputs(0);
+        max_val := inputs(0);
+        for i in 1 to inputs'length - 1 loop
+            if inputs(i) < min_val then
+                min_val := inputs(i);
+            end if;
+            if inputs(i) > max_val then
+                max_val := inputs(i);
+            end if;
+        end loop;
+    end procedure;
+end package body;
+
+-- Entidade principal
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use work.util.all;
+
+entity detector_min_max is
+    generic (
+        num_inputs : integer := 4;
+        num_bits : integer := 8
+    );
+    port (
+        entrada1, entrada2, entrada3, entrada4 : in unsigned(num_bits-1 downto 0);
+        min_out, max_out : out unsigned(num_bits-1 downto 0)
+    );
+end entity;
+
+architecture behavioral of detector_min_max is
+    signal x : unsigned_array(0 to 3)(num_bits-1 downto 0);
+    signal min_val, max_val : unsigned(num_bits-1 downto 0);
+begin
+    -- Atribuir entradas ao vetor
+    x(0) <= entrada1;
+    x(1) <= entrada2;
+    x(2) <= entrada3;
+    x(3) <= entrada4;
+    
+    -- Chamar a procedure para calcular min e max
+    process(x)
+    begin
+        find_min_max(x, min_val, max_val);
+    end process;
+    
+    -- Atribuir saídas
+    min_out <= min_val;
+    max_out <= max_val;
+end architecture;

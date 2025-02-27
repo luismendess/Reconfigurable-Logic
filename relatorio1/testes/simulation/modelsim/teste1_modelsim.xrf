@@ -1,0 +1,17 @@
+vendor_name = ModelSim
+source_file = 1, C:/Users/luish/Desktop/Faculdade 2024-2/Logica Reconfiguravel/testes/teste1.vhd
+source_file = 1, c:/intelfpga_lite/19.1/quartus/libraries/vhdl/ieee/prmtvs_b.vhd
+source_file = 1, c:/intelfpga_lite/19.1/quartus/libraries/vhdl/ieee/prmtvs_p.vhd
+source_file = 1, c:/intelfpga_lite/19.1/quartus/libraries/vhdl/ieee/timing_b.vhd
+source_file = 1, c:/intelfpga_lite/19.1/quartus/libraries/vhdl/ieee/timing_p.vhd
+source_file = 1, C:/Users/luish/Desktop/Faculdade 2024-2/Logica Reconfiguravel/testes/db/teste1.cbx.xml
+design_name = hard_block
+design_name = teste1
+instance = comp, \~QUARTUS_CREATED_GND~I\, ~QUARTUS_CREATED_GND~I, teste1, 1
+instance = comp, \z~output\, z~output, teste1, 1
+instance = comp, \a~input\, a~input, teste1, 1
+instance = comp, \b~input\, b~input, teste1, 1
+instance = comp, \z~0\, z~0, teste1, 1
+instance = comp, \~QUARTUS_CREATED_UNVM~\, ~QUARTUS_CREATED_UNVM~, teste1, 1
+instance = comp, \~QUARTUS_CREATED_ADC1~\, ~QUARTUS_CREATED_ADC1~, teste1, 1
+instance = comp, \~QUARTUS_CREATED_ADC2~\, ~QUARTUS_CREATED_ADC2~, teste1, 1

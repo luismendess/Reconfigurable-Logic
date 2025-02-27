@@ -1,0 +1,56 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity Calculator is
+    Port (
+        SW : in STD_LOGIC_VECTOR(9 downto 0);
+        Result : out STD_LOGIC_VECTOR(7 downto 0);
+        Overflow : out STD_LOGIC
+    );
+end Calculator;
+
+architecture Behavioral of Calculator is
+    signal num1, num2 : STD_LOGIC_VECTOR(2 downto 0);
+    signal Opcode : STD_LOGIC_VECTOR(2 downto 0);
+    signal Sum, Diff, Prod, Quot, And_Result, Or_Result : STD_LOGIC_VECTOR(7 downto 0);
+    signal Div_By_Zero : STD_LOGIC;
+begin
+    -- Mapear entradas
+    num1 <= SW(2 downto 0);
+    num2 <= SW(5 downto 3);
+    Opcode <= SW(8 downto 6);
+
+    -- Instanciar os módulos de operação
+    U1: entity work.Adder port map (A => num1, B => num2, Sum => Sum, Overflow => Overflow);
+    U2: entity work.Subtractor port map (A => num1, B => num2, Diff => Diff);
+    U3: entity work.Multiplier port map (A => num1, B => num2, Prod => Prod, Overflow => Overflow);
+    U4: entity work.Divider port map (A => num1, B => num2, Quot => Quot, Div_By_Zero => Div_By_Zero);
+    U5: entity work.And_Operation port map (A => num1, B => num2, And_Result => And_Result);
+    U6: entity work.Or_Operation port map (A => num1, B => num2, Or_Result => Or_Result);
+
+    process(num1, num2, Opcode, Sum, Diff, Prod, Quot, And_Result, Or_Result, Div_By_Zero)
+    begin
+        case Opcode is
+            when "000" => -- Soma
+                Result <= Sum;
+            when "001" => -- Subtração
+                Result <= Diff;
+            when "010" => -- Multiplicação
+                Result <= Prod;
+            when "011" => -- Divisão
+                if Div_By_Zero = '1' then
+                    Result <= (others => 'X'); -- Divisão por zero
+                else
+                    Result <= Quot;
+                end if;
+            when "100" => -- AND
+                Result <= And_Result;
+            when "101" => -- OR
+                Result <= Or_Result;
+            when others =>
+                Result <= (others => '0');
+        end case;
+    end process;
+end Behavioral;

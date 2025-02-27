@@ -1,0 +1,111 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity semaforos is
+    port (
+        clock       : in std_logic;  -- Sinal de clock principal
+        reset       : in std_logic;  -- Botão de reset
+        mode_select : in std_logic_vector(1 downto 0);  -- Seleção de modo
+        semaforo1   : out std_logic_vector(2 downto 0);  -- Saídas para o primeiro semáforo
+        semaforo2   : out std_logic_vector(2 downto 0)   -- Saídas para o segundo semáforo
+    );
+end entity semaforos;
+
+architecture comportamental of semaforos is
+    -- Constantes para definir os estados dos semáforos
+    constant GREEN  : std_logic_vector(2 downto 0) := "100";
+    constant YELLOW : std_logic_vector(2 downto 0) := "010";
+    constant RED    : std_logic_vector(2 downto 0) := "001";
+    
+    -- Estados da máquina de estados
+    type estado is (NORMAL_S1_GREEN, NORMAL_S1_YELLOW, NORMAL_S1_RED,
+                    TESTE_S1_GREEN, TESTE_S1_YELLOW, TESTE_S1_RED,
+                    STANDBY);
+    
+    signal estado_atual, proximo_estado : estado;
+    signal contador : integer range 0 to 50_000_000;  -- Contador para temporização
+    
+    -- Sinais para controle dos tempos
+    constant TEMPO_VERDE_NORMAL   : integer := 5;    -- 5 segundos no modo normal
+    constant TEMPO_AMARELO_NORMAL : integer := 2;    -- 2 segundos no modo normal
+    constant TEMPO_VERDE_TESTE    : integer := 1;    -- 1 segundo no modo teste
+    constant TEMPO_AMARELO_TESTE  : integer := 0;    -- Quase instantâneo no modo teste
+    
+begin
+    -- Processo de transição de estados
+    process(clock, reset)
+    begin
+        if reset = '1' then
+            estado_atual <= NORMAL_S1_GREEN;
+            contador <= 0;
+        elsif rising_edge(clock) then
+            case mode_select is
+                when "00" =>  -- Modo Normal
+                    case estado_atual is
+                        when NORMAL_S1_GREEN =>
+                            if contador >= TEMPO_VERDE_NORMAL then
+                                proximo_estado <= NORMAL_S1_YELLOW;
+                                contador <= 0;
+                            else
+                                contador <= contador + 1;
+                            end if;
+                        
+                        when NORMAL_S1_YELLOW =>
+                            if contador >= TEMPO_AMARELO_NORMAL then
+                                proximo_estado <= NORMAL_S1_RED;
+                                contador <= 0;
+                            else
+                                contador <= contador + 1;
+                            end if;
+                        
+                        when NORMAL_S1_RED =>
+                            -- Lógica similar para os outros estados
+                            -- Completar com a transição completa
+                        
+                        others => null;
+                    end case;
+                
+                when "01" =>  -- Modo Teste
+                    -- Implementar lógica de tempo mais rápida
+                    null;
+                
+                when "10" =>  -- Modo Standby (Amarelo piscante)
+                    proximo_estado <= STANDBY;
+                
+                when others => null;
+            end case;
+            
+            estado_atual <= proximo_estado;
+        end if;
+    end process;
+    
+    -- Processo para definir saídas dos semáforos
+    process(estado_atual, mode_select)
+    begin
+        case mode_select is
+            when "00" =>  -- Modo Normal
+                case estado_atual is
+                    when NORMAL_S1_GREEN =>
+                        semaforo1 <= GREEN;
+                        semaforo2 <= RED;
+                    
+                    when NORMAL_S1_YELLOW =>
+                        semaforo1 <= YELLOW;
+                        semaforo2 <= RED;
+                    
+                    when NORMAL_S1_RED =>
+                        semaforo1 <= RED;
+                        semaforo2 <= GREEN;
+                    
+                    others => null;
+                end case;
+            
+            when "10" =>  -- Modo Standby
+                semaforo1 <= YELLOW;
+                semaforo2 <= YELLOW;
+            
+            when others => null;
+        end case;
+    end process;
+end architecture comportamental;

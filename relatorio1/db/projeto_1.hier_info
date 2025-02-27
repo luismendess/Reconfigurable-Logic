@@ -1,0 +1,25 @@
+|projeto_1
+a => z.IN0
+a => y.IN0
+a => v.IN0
+a => u.IN0
+a => t.IN0
+a => s.IN0
+a => x.DATAIN
+b => z.IN1
+b => y.IN1
+b => v.IN1
+b => u.IN1
+b => t.IN1
+b => s.IN1
+b => w.DATAIN
+s << s.DB_MAX_OUTPUT_PORT_TYPE
+t << t.DB_MAX_OUTPUT_PORT_TYPE
+u << u.DB_MAX_OUTPUT_PORT_TYPE
+v << v.DB_MAX_OUTPUT_PORT_TYPE
+w << b.DB_MAX_OUTPUT_PORT_TYPE
+x << a.DB_MAX_OUTPUT_PORT_TYPE
+y << y.DB_MAX_OUTPUT_PORT_TYPE
+z << z.DB_MAX_OUTPUT_PORT_TYPE
+
+

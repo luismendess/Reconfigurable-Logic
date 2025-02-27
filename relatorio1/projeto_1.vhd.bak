@@ -1,0 +1,14 @@
+library ieee ;
+use ieee . std_logic_1164 . all ;
+-- ------------------------------------
+entity projeto_1 is
+port (
+a , b: in bit ;
+z: out bit
+);
+end entity ;
+-- ------------------------------------
+architecture projeto_1 of projeto_1 is
+begin
+z <= a and b;
+end architecture ;
